@@ -11,7 +11,8 @@
 		"migrate": "knex migrate:latest",
 		"down": "knex migrate:down",
 		"rollback": "knex migrate:rollback",
-		"resetdb": "npm run rollback && npm run migrate && npm run seed"
+		"resetdb": "npm run rollback && npm run migrate && npm run seed",
+		"seed": "knex seed:run"
 	},
 	"repository": {
 		"type": "git",

@@ -15,7 +15,7 @@ server.use(express.json());
 server.use(cors());
 
 server.use("/users", usersRouter);
-server.use("/potluck-events", potluckEventsRouter);
+server.use("/potlucks", potluckEventsRouter);
 
 //root
 server.get("/", (req, res) => {
