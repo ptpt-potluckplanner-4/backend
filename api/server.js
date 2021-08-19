@@ -6,14 +6,16 @@ const cors = require("cors");
 const morgan = require("morgan");
 const server = express();
 
-const authRouter = require("./auth/auth-router.js");
+const usersRouter = require("./users/users-router");
+const potluckEventsRouter = require("./potluck-events/potluck-events-router");
 
 server.use(morgan("dev"));
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
 
-server.use("/auth", authRouter);
+server.use("/users", usersRouter);
+server.use("/potluck-events", potluckEventsRouter);
 
 //root
 server.get("/", (req, res) => {
