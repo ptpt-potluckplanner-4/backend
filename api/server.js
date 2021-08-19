@@ -6,8 +6,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const server = express();
 
-const usersRouter = require("./users/users-router");
-const potluckEventsRouter = require("./potluck-events/potluck-events-router");
+const usersRouter = require("./routers/users-router");
+const potluckEventsRouter = require("./routers/potlucks-router");
 
 server.use(morgan("dev"));
 server.use(helmet());
