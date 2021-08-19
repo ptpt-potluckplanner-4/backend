@@ -15,11 +15,33 @@ const getAllPotlucks = () => {
 };
 
 const getPotluckByFilter = (filter) => {
-	return db("potlucks").where(filter).orderBy("potluck_id");
+	return db("potlucks as p")
+		.select(
+			"potluck_id",
+			"title",
+			"date",
+			"time",
+			"location",
+			"u.name as organizer",
+		)
+		.join("users as u", "p.organizer", "u.user_id")
+		.where(filter)
+		.orderBy("potluck_id");
 };
 
 const getPotluckById = (potluck_id) => {
-	return db("potlucks").where({ potluck_id }).orderBy("potluck_id");
+	return db("potlucks as p")
+		.select(
+			"potluck_id",
+			"title",
+			"date",
+			"time",
+			"location",
+			"u.name as organizer",
+		)
+		.join("users as u", "p.organizer", "u.user_id")
+		.where({ potluck_id })
+		.orderBy("potluck_id");
 };
 
 const addPotluck = async (newPotluck) => {
@@ -32,7 +54,6 @@ const addPotluck = async (newPotluck) => {
         organizer: state.user_id
     }
     */
-
 	const [potluck_id] = await db("potlucks").insert(newPotluck);
 	const newlyAdded = await getPotluckById(potluck_id);
 	return newlyAdded;
