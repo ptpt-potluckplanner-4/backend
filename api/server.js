@@ -8,6 +8,7 @@ const server = express();
 
 const usersRouter = require("./routers/users-router");
 const potluckEventsRouter = require("./routers/potlucks-router");
+const authRouter = require("./routers/auth-router");
 
 server.use(morgan("dev"));
 server.use(helmet());
@@ -16,6 +17,7 @@ server.use(cors());
 
 server.use("/users", usersRouter);
 server.use("/potlucks", potluckEventsRouter);
+server.use("/auth", authRouter);
 
 //root
 server.get("/", (req, res) => {
