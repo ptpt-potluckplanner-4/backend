@@ -16,7 +16,7 @@ const addUser = async (newUser) => {
 	// return newlyAddedUser;
 
 	const user_id = await db("users").returning("user_id").insert(newUser);
-	const newlyAddedUser = await getUserById(user_id);
+	const newlyAddedUser = await getUserById(user_id[0]);
 	return newlyAddedUser;
 };
 
