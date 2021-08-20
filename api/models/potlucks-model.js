@@ -62,9 +62,11 @@ const addPotluck = async (newPotluck) => {
 //food list per potluck
 const getFoodsById = async (potluck_id) => {
 	return db("potluck_foods as pf")
-		.select("pf.potluck_id", "pf.food_id", "food_name", "contributor")
+		.select("pf.potluckFood_id", "food_name", "u.name as contributor")
 		.leftJoin("foods as f", "f.food_id", "pf.food_id")
 		.leftJoin("potlucks as p", "p.potluck_id", "pf.potluck_id")
+		.leftJoin("users as u", "pf.contributor", "u.user_id")
+
 		.where("pf.potluck_id", potluck_id)
 		.orderBy("pf.food_id");
 };
@@ -72,12 +74,38 @@ const getFoodsById = async (potluck_id) => {
 //create a food for a potluck
 const createFood = async (potluck_id, food) => {
 	const [food_id] = await db("foods").insert(food);
+
+	// eslint-disable-next-line no-unused-vars
 	const [potluckFood_id] = await db("potluck_foods").insert({
 		potluck_id: potluck_id,
 		food_id: food_id,
 	});
 	const foodListByPotluckId = await getFoodsById(potluck_id);
 	return foodListByPotluckId;
+};
+
+const getPotluckFoodById = (potluckFood_id) => {
+	return db("potluck_foods as pf")
+		.select("pf.potluckFood_id", "food_name", "u.name as contributor")
+		.leftJoin("foods as f", "f.food_id", "pf.food_id")
+		.leftJoin("potlucks as p", "p.potluck_id", "pf.potluck_id")
+		.leftJoin("users as u", "pf.contributor", "u.user_id")
+		.where("pf.potluckFood_id", potluckFood_id)
+		.orderBy("pf.food_id");
+};
+
+const claimFood = async (potluckFood_id, contributor) => {
+	// eslint-disable-next-line no-unused-vars
+	const claim = await db("potluck_foods as pf")
+		.select("pf.potluckFood_id", "food_name", "u.name as contributor")
+		.leftJoin("foods as f", "f.food_id", "pf.food_id")
+		.leftJoin("potlucks as p", "p.potluck_id", "pf.potluck_id")
+		.leftJoin("users as u", "pf.contributor", "u.user_id")
+		.where("pf.potluckFood_id", potluckFood_id)
+		.update(contributor)
+		.orderBy("pf.food_id");
+	const getPotluckFood = await getPotluckFoodById(potluckFood_id);
+	return getPotluckFood;
 };
 
 //claim a food for a potluck
@@ -98,4 +126,6 @@ module.exports = {
 	addPotluck,
 	getFoodsById,
 	createFood,
+	getPotluckFoodById,
+	claimFood,
 };
