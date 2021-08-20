@@ -57,8 +57,9 @@ const addPotluck = async (newPotluck) => {
 	const potluck_id = await db("potlucks")
 		.returning("potluck_id")
 		.insert(newPotluck);
-	const newlyCreatedPotluck = await getPotluckById(potluck_id);
-	return newlyCreatedPotluck;
+	// const newlyCreatedPotluck = await getPotluckById(potluck_id);
+	// return newlyCreatedPotluck;
+	return potluck_id;
 };
 
 //food list per potluck
