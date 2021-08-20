@@ -25,3 +25,17 @@ time: "string",
 location: "string",
 organizer: state.user_id
 }
+
+### POST create a food for the potluck
+
+/potlucks/:id/foods
+
+requires {
+food_name: "string
+}
+
+returns a list of all the foods to bring in the potluck
+
+### GET array of all the foods to bring in the potluck
+
+/potlucks/:id/foods
