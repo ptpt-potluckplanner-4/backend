@@ -57,6 +57,7 @@ const addPotluck = async (newPotluck) => {
 	const potluck_id = await db("potlucks")
 		.returning("potluck_id")
 		.insert(newPotluck);
+
 	const newlyCreatedPotluck = await getPotluckById(potluck_id[0]);
 	return newlyCreatedPotluck;
 };
@@ -73,15 +74,16 @@ const getFoodsById = async (potluck_id) => {
 		.orderBy("pf.food_id");
 };
 
-//create a food for a potluck
 const createFood = async (potluck_id, food) => {
-	const food_id = await db("foods").insert(food);
+	const food_id = await db("foods").returning("food_id").insert(food);
 
 	// eslint-disable-next-line no-unused-vars
-	const potluckFood_id = await db("potluck_foods").insert({
-		potluck_id: potluck_id,
-		food_id: food_id,
-	});
+	const potluckFood_id = await db("potluck_foods")
+		.returning("potluckFood_id")
+		.insert({
+			potluck_id: potluck_id,
+			food_id: food_id[0],
+		});
 	const foodListByPotluckId = await getFoodsById(potluck_id);
 	return foodListByPotluckId;
 };
