@@ -28,6 +28,25 @@ router.post("/create", (req, res, next) => {
 		.catch(next);
 });
 
+router.get("/:id/foods", (req, res, next) => {
+	const { id } = req.params;
+	Potlucks.getFoodsById(id)
+		.then((foods) => {
+			res.status(200).json(foods);
+		})
+		.catch(next);
+});
+
+router.post("/:id/foods", (req, res, next) => {
+	const { id } = req.params;
+	const body = req.body;
+	Potlucks.createFood(id, body)
+		.then((newFood) => {
+			res.status(200).json(newFood);
+		})
+		.catch(next);
+});
+
 //update
 //delete
 

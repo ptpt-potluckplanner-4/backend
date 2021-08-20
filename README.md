@@ -1,7 +1,5 @@
 ## Welcome to Potluck Planner API
 
-#### by HanselV
-
 ### GET all users
 
 /users

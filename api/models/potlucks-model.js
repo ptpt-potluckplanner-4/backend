@@ -55,11 +55,33 @@ const addPotluck = async (newPotluck) => {
     }
     */
 	const [potluck_id] = await db("potlucks").insert(newPotluck);
-	const newlyAdded = await getPotluckById(potluck_id);
-	return newlyAdded;
+	const newlyCreatedPotluck = await getPotluckById(potluck_id);
+	return newlyCreatedPotluck;
 };
 
-//get all foods for a potluck
+//food list per potluck
+const getFoodsById = async (potluck_id) => {
+	return db("potluck_foods as pf")
+		.select("pf.potluck_id", "pf.food_id", "food_name", "contributor")
+		.leftJoin("foods as f", "f.food_id", "pf.food_id")
+		.leftJoin("potlucks as p", "p.potluck_id", "pf.potluck_id")
+		.where("pf.potluck_id", potluck_id)
+		.orderBy("pf.food_id");
+};
+
+//create a food for a potluck
+const createFood = async (potluck_id, food) => {
+	const [food_id] = await db("foods").insert(food);
+	const [potluckFood_id] = await db("potluck_foods").insert({
+		potluck_id: potluck_id,
+		food_id: food_id,
+	});
+	const foodListByPotluckId = await getFoodsById(potluck_id);
+	return foodListByPotluckId;
+};
+
+//claim a food for a potluck
+
 //get all members of a potluck
 //get user details including potlucks to attend
 
@@ -74,4 +96,6 @@ module.exports = {
 	getPotluckByFilter,
 	getPotluckById,
 	addPotluck,
+	getFoodsById,
+	createFood,
 };
