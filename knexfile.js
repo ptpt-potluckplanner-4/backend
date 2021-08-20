@@ -1,4 +1,4 @@
-const pgConnection = process.env.DATABASE_URL;
+// const pgConnection = process.env.DATABASE_URL;
 
 module.exports = {
 	development: {
@@ -24,7 +24,7 @@ module.exports = {
 	production: {
 		client: "pg",
 		connection: {
-			connectionString: pgConnection,
+			connectionString: process.env.DATABASE_URL + `?ssl=true`,
 			ssl: { rejectUnauthorized: false },
 		},
 		pool: {
