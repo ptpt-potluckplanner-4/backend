@@ -62,7 +62,7 @@ const addPotluck = async (newPotluck) => {
 //food list per potluck
 const getFoodsById = async (potluck_id) => {
 	return db("potluck_foods as pf")
-		.select("pf.potluckFood_id", "food_name", "u.name as contributor")
+		.select("pf.potluckFood_id", "f.food_name", "u.name as contributor")
 		.leftJoin("foods as f", "f.food_id", "pf.food_id")
 		.leftJoin("potlucks as p", "p.potluck_id", "pf.potluck_id")
 		.leftJoin("users as u", "pf.contributor", "u.user_id")
@@ -108,12 +108,9 @@ const claimFood = async (potluckFood_id, contributor) => {
 	return getPotluckFood;
 };
 
-//claim a food for a potluck
-
 //get all members of a potluck
 //get user details including potlucks to attend
 
-//claim (post) a food to potluck event using state.user_id
 //join (post) a potluck event using state.user_id
 
 //get complete details per potluck events including foods and members

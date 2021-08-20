@@ -31,7 +31,7 @@ organizer: state.user_id
 /potlucks/:id/foods
 
 requires {
-food_name: "string
+food_name: "string"
 }
 
 returns a list of all the foods to bring in the potluck
@@ -39,3 +39,11 @@ returns a list of all the foods to bring in the potluck
 ### GET array of all the foods to bring in the potluck
 
 /potlucks/:id/foods
+
+### PUT set your name as contributor of food from the list
+
+/:id/foods/:potluckFood_id
+
+requires {
+contributor: state.user_id
+}
