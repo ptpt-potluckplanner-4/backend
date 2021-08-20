@@ -11,7 +11,7 @@ const getUserById = (user_id) => {
 };
 
 const addUser = async (newUser) => {
-	const [user_id] = await db("users").insert(newUser);
+	const user_id = await db("users").insert(newUser);
 	const newlyAddedUser = await getUserById(user_id);
 	return newlyAddedUser;
 };

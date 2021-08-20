@@ -54,7 +54,7 @@ const addPotluck = async (newPotluck) => {
         organizer: state.user_id
     }
     */
-	const [potluck_id] = await db("potlucks").insert(newPotluck);
+	const potluck_id = await db("potlucks").insert(newPotluck);
 	const newlyCreatedPotluck = await getPotluckById(potluck_id);
 	return newlyCreatedPotluck;
 };
@@ -73,10 +73,10 @@ const getFoodsById = async (potluck_id) => {
 
 //create a food for a potluck
 const createFood = async (potluck_id, food) => {
-	const [food_id] = await db("foods").insert(food);
+	const food_id = await db("foods").insert(food);
 
 	// eslint-disable-next-line no-unused-vars
-	const [potluckFood_id] = await db("potluck_foods").insert({
+	const potluckFood_id = await db("potluck_foods").insert({
 		potluck_id: potluck_id,
 		food_id: food_id,
 	});
