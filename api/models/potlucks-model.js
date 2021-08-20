@@ -54,7 +54,9 @@ const addPotluck = async (newPotluck) => {
         organizer: state.user_id
     }
     */
-	const potluck_id = await db("potlucks").insert(newPotluck);
+	const potluck_id = await db("potlucks")
+		.returning("potluck_id")
+		.insert(newPotluck);
 	const newlyCreatedPotluck = await getPotluckById(potluck_id);
 	return newlyCreatedPotluck;
 };

@@ -15,8 +15,9 @@ const addUser = async (newUser) => {
 	// const newlyAddedUser = await getUserById(user_id);
 	// return newlyAddedUser;
 
-	const added = await db("users").returning("user_id").insert(newUser);
-	return added;
+	const user_id = await db("users").returning("user_id").insert(newUser);
+	const newlyAddedUser = await getUserById(user_id);
+	return newlyAddedUser;
 };
 
 module.exports = {
