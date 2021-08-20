@@ -44,6 +44,14 @@ returns a list of all the foods to bring in the potluck
 
 /:id/foods/:potluckFood_id
 
-requires {
+the user must be logged in and they can only claim food as theirs to bring, they cant put other people's name
+
+requires object {
 contributor: state.user_id
+}
+
+returns updated object of that item {
+"potluckFood_id": 7,
+"food_name": "baked potatoes",
+"contributor": "Name of user"
 }
