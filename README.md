@@ -8,7 +8,7 @@ requires object notNullable: `{ name: "string", username: "string", password: "s
 
 returns the user info
 
-## POST login
+## POST login to account
 
 `[POST] https://potluck-planner-04.herokuapp.com/auth/login`
 

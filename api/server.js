@@ -21,7 +21,9 @@ server.use("/auth", authRouter);
 
 //root
 server.get("/", (req, res) => {
-	res.send(`<h2> welcome to potluck-planner API homepage! </h2>`);
+	res.send(
+		`<h2> Welcome to potluck-planner API homepage! </h2> <p> Please read the docs: https://github.com/ptpt-potluckplanner-4/backend/blob/main/README.md </p>`,
+	);
 });
 
 // catch all

@@ -26,12 +26,14 @@ router.post("/login", async (req, res, next) => {
 	} else if (user && bcrypt.compareSync(password, user.password)) {
 		const token = tokenBuilder(user);
 		res.json({
-			user,
+			message: `Welcome ${user.name}!`,
 			token,
 		});
 	} else {
 		next();
 	}
 });
+
+//!need to add error handler on routers
 
 module.exports = router;
