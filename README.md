@@ -2,11 +2,19 @@
 
 ## POST create a user
 
-`[POST] https://potluck-planner-04.herokuapp.com/auth`
+`[POST] https://potluck-planner-04.herokuapp.com/auth/register`
 
 requires object notNullable: `{ name: "string", username: "string", password: "string" }`
 
 returns the user info
+
+## POST login
+
+`[POST] https://potluck-planner-04.herokuapp.com/auth/login`
+
+requires object notNullable: `{ username: "string", password: "string" }`
+
+returns the user info and token
 
 ## GET all users
 

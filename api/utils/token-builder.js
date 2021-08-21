@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const secret = process.env.JWT_SECRET || "lambdaSchool";
+const secret = process.env.JWT_SECRET;
 
 module.exports = function (user) {
 	const payload = {
