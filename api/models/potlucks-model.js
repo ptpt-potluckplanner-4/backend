@@ -69,7 +69,6 @@ const getFoodsById = async (potluck_id) => {
 		.leftJoin("foods as f", "f.food_id", "pf.food_id")
 		.leftJoin("potlucks as p", "p.potluck_id", "pf.potluck_id")
 		.leftJoin("users as u", "pf.contributor", "u.user_id")
-
 		.where("pf.potluck_id", potluck_id)
 		.orderBy("pf.food_id");
 };

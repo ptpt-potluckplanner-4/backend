@@ -6,15 +6,15 @@ const getAllUsers = () => {
 
 //register, login, edit, and delete a user will be in auth-router
 
+const getUserBy = (filter) => {
+	return db("users").where(filter);
+};
+
 const getUserById = (user_id) => {
 	return db("users").where({ user_id });
 };
 
 const addUser = async (newUser) => {
-	// const [user_id] = await db("users").insert(newUser);
-	// const newlyAddedUser = await getUserById(user_id);
-	// return newlyAddedUser;
-
 	const user_id = await db("users").returning("user_id").insert(newUser);
 	const newlyAddedUser = await getUserById(user_id[0]);
 	return newlyAddedUser;
@@ -23,5 +23,6 @@ const addUser = async (newUser) => {
 module.exports = {
 	getAllUsers,
 	getUserById,
+	getUserBy,
 	addUser,
 };
