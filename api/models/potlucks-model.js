@@ -41,7 +41,7 @@ const getPotluckById = (potluck_id) => {
 		)
 		.join("users as u", "p.organizer", "u.user_id")
 		.where({ potluck_id })
-		.orderBy("potluck_id");
+		.first();
 };
 
 const addPotluck = async (newPotluck) => {
