@@ -2,6 +2,28 @@ const jwt = require("jsonwebtoken");
 const Users = require("../models/users-model");
 const secret = process.env.JWT_SECRET || "lambdaSchool";
 
+const validateCredentials = async (req, res, next) => {
+	const body = req.body;
+
+	if (!body || Object.keys(body).length === 0) {
+		res.status(400).json({ message: "Textfields required." });
+	} else if (!body.name) {
+		res.status(400).json({ message: "Name required." });
+	} else if (!body.username) {
+		res.status(400).json({ message: "Username required." });
+	} else if (!body.password) {
+		res.status(400).json({ message: "Password required." });
+	} else if ((typeof body.password || body.username) !== "string") {
+		res
+			.status(400)
+			.json({ message: "Password and username must be alphanumeric." });
+	} else {
+		req.body.username = body.username.trim();
+		req.body.password = body.password.trim();
+		next();
+	}
+};
+
 const restricted = (req, res, next) => {
 	const token = req.headers.authorization?.split(" ")[1];
 
@@ -37,26 +59,6 @@ const checkUsernameAvailable = async (req, res, next) => {
 	if (userFound) {
 		res.status(401).json({ message: "Username already taken." });
 	} else {
-		next();
-	}
-};
-
-const validateCredentials = async (req, res, next) => {
-	const body = req.body;
-
-	if (!body || Object.keys(body).length === 0) {
-		res.status(400).json({ message: "Username and password required." });
-	} else if (!body.username) {
-		res.status(400).json({ message: "Username required." });
-	} else if (!body.password) {
-		res.status(400).json({ message: "Password required." });
-	} else if ((typeof body.password || body.username) !== "string") {
-		res
-			.status(400)
-			.json({ message: "Password and username must be alphanumeric." });
-	} else {
-		req.body.username = body.username.trim();
-		req.body.password = body.password.trim();
 		next();
 	}
 };
