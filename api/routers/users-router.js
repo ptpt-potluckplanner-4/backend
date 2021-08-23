@@ -10,4 +10,6 @@ router.get("/", (req, res, next) => {
 		.catch(next);
 });
 
+//! need to add get user by id, edit user info, delete user
+
 module.exports = router;

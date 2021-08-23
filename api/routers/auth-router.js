@@ -39,6 +39,7 @@ router.post(
 			const token = tokenBuilder(user);
 			res.json({
 				message: `Welcome ${user.name}!`,
+				user_id: `${user.user_id}`,
 				token,
 			});
 		} else {

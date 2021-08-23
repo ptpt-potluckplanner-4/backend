@@ -10,7 +10,7 @@ router.get("/", (req, res, next) => {
 		.catch(next);
 });
 
-router.post("/", (req, res, next) => {
+router.post("/create", (req, res, next) => {
 	const body = req.body;
 	Potlucks.addPotluck(body)
 		.then((newPotluck) => {
