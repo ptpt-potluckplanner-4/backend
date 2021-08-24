@@ -58,10 +58,10 @@ returns updated object of that item `{ "potluckFood_id": 7, "food_name": "baked 
 
 ## GET array of all guests coming to potluck
 
-`[GET] /potlucks/:id/guests`
+`[GET] https://potluck-planner-04.herokuapp.com/potlucks/:id/guests`
 
 ## PUT set your name as one of the guests coming to the potluck
 
-`[POST] /potlucks/:id/guests`
+`[POST] https://potluck-planner-04.herokuapp.com/potlucks/:id/guests`
 
 requires object: `{"guest": state.user_id}`

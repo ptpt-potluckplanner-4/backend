@@ -75,7 +75,6 @@ const getFoodsById = async (potluck_id) => {
 
 const createFood = async (potluck_id, food) => {
 	const food_id = await db("foods").returning("food_id").insert(food);
-
 	// eslint-disable-next-line no-unused-vars
 	const potluckFood_id = await db("potluck_foods")
 		.returning("potluckFood_id")
@@ -96,7 +95,6 @@ const getPotluckFoodById = (potluckFood_id) => {
 		.where("pf.potluckFood_id", potluckFood_id)
 		.orderBy("pf.food_id");
 };
-
 const claimFood = async (potluckFood_id, contributor) => {
 	// eslint-disable-next-line no-unused-vars
 	const claim = await db("potluck_foods as pf")
@@ -111,6 +109,7 @@ const claimFood = async (potluckFood_id, contributor) => {
 	return getPotluckFoods;
 };
 
+//guests per potluck
 const getPotluckGuestsById = (potluck_id) => {
 	return db("potluck_guests as pg")
 		.select("pg.potluckGuest_id", "pg.potluck_id", "u.user_id", "u.name")
@@ -118,7 +117,6 @@ const getPotluckGuestsById = (potluck_id) => {
 		.where("potluck_id", potluck_id)
 		.orderBy("u.user_id");
 };
-
 const joinPotluck = async (potluck_id, user_id) => {
 	// eslint-disable-next-line no-unused-vars
 	const join = await db("potluck_guests as pg")
@@ -133,8 +131,12 @@ const joinPotluck = async (potluck_id, user_id) => {
 	return potluckGuests;
 };
 
-//get user details including potlucks to attend
+const getPotlucksToAttendByUser = (user_id) => {};
+const getOrganizedPotluckByUser = (user_id) => {};
 
+const deletePotluckById = (potluck_id) => {};
+
+//get user details including potlucks to attend and potluck organized
 //get complete details per potluck events including foods and members
 //update and delete potluck info
 

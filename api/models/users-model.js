@@ -4,7 +4,7 @@ const getAllUsers = () => {
 	return db("users").orderBy("user_id");
 };
 
-//register, login, edit, and delete a user will be in auth-router
+//register, login, edit, and delete a user are in auth-router
 
 const getUserBy = (filter) => {
 	return db("users").where(filter);
