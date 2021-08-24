@@ -18,8 +18,8 @@ exports.up = function (knex) {
 				.notNullable()
 				.references("user_id")
 				.inTable("users")
-				.onUpdate("RESTRICT")
-				.onDelete("RESTRICT");
+				.onUpdate("CASCADE")
+				.onDelete("CASCADE");
 		})
 		.createTable("foods", (foods) => {
 			foods.increments("food_id");
@@ -33,41 +33,41 @@ exports.up = function (knex) {
 				.notNullable()
 				.references("potluck_id")
 				.inTable("potlucks")
-				.onUpdate("RESTRICT")
-				.onDelete("RESTRICT");
+				.onUpdate("CASCADE")
+				.onDelete("CASCADE");
 			potluckFoods
 				.integer("food_id") //what food
 				.unsigned()
 				.notNullable()
 				.references("food_id")
 				.inTable("foods")
-				.onUpdate("RESTRICT")
-				.onDelete("RESTRICT");
+				.onUpdate("CASCADE")
+				.onDelete("CASCADE");
 			potluckFoods
 				.integer("contributor") //who brings this food. refers to user_id
 				.unsigned()
 				.references("user_id")
 				.inTable("users")
-				.onUpdate("RESTRICT")
-				.onDelete("RESTRICT");
+				.onUpdate("CASCADE")
+				.onDelete("CASCADE");
 		})
 		.createTable("potluck_guests", (potluckGuests) => {
-			potluckGuests.integer("potluckGuest_id");
+			potluckGuests.increments("potluckGuest_id");
 			potluckGuests
 				.integer("potluck_id") //which potluck event
 				.unsigned()
 				.notNullable()
 				.references("potluck_id")
 				.inTable("potlucks")
-				.onUpdate("RESTRICT")
-				.onDelete("RESTRICT");
+				.onUpdate("CASCADE")
+				.onDelete("CASCADE");
 			potluckGuests
 				.integer("guest") //the attendee or guest
 				.unsigned()
 				.references("user_id")
 				.inTable("users")
-				.onUpdate("RESTRICT")
-				.onDelete("RESTRICT");
+				.onUpdate("CASCADE")
+				.onDelete("CASCADE");
 		});
 };
 

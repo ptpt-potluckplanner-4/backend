@@ -69,7 +69,30 @@ router.put("/:id/foods/:potluckFood_id", (req, res, next) => {
 		.catch(next);
 });
 
+router.get("/:id/guests", (req, res, next) => {
+	const { id } = req.params;
+	Potlucks.getPotluckGuestsById(id)
+		.then((guests) => {
+			res.status(200).json(guests);
+		})
+		.catch(next);
+});
+
+router.post("/:id/guests", (req, res, next) => {
+	const { id } = req.params;
+
+	//body requires: { guest: state_user.id }
+	const body = req.body;
+
+	Potlucks.joinPotluck(id, body.guest)
+		.then((response) => {
+			res.json(response);
+		})
+		.catch(next);
+});
+
 //update
-//delete
+//delete food
+//delete the potluck
 
 module.exports = router;

@@ -55,3 +55,13 @@ the user must be logged in and they can only claim food as theirs to bring, they
 requires object: `{ contributor: state.user_id }`
 
 returns updated object of that item `{ "potluckFood_id": 7, "food_name": "baked potatoes", "contributor": "Name of user" }`
+
+## GET array of all guests coming to potluck
+
+`[GET] /potlucks/:id/guests`
+
+## PUT set your name as one of the guests coming to the potluck
+
+`[POST] /potlucks/:id/guests`
+
+requires object: `{"guest": state.user_id}`
