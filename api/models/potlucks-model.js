@@ -141,12 +141,27 @@ const joinPotluck = async (potluck_id, user_id) => {
 	return potluckGuests;
 };
 
-const getPotlucksToAttendByUser = (user_id) => {};
-const getOrganizedPotluckByUser = (user_id) => {};
+const getPotlucksToAttendByUser = (user_id) => {
+	return db("potluck_guests as pg")
+		.select("p.*")
+		.leftJoin("users as u", "pg.guest", "u.user_id")
+		.leftJoin("potlucks as p", "pg.potluck_id", "p.potluck_id")
+		.where("guest", user_id)
+		.orderBy("pg.guest");
+};
+
+//! untested and not connected to router yet
+const getOrganizedPotluckByUser = (user_id) => {
+	return db("potluck_guests as pg")
+		.select("p.*")
+		.leftJoin("users as u", "pg.guest", "u.user_id")
+		.leftJoin("potlucks as p", "pg.potluck_id", "p.potluck_id")
+		.where("p.organizer", user_id)
+		.orderBy("pg.guest");
+};
 
 const deletePotluckById = (potluck_id) => {};
 
-//get user details including potlucks to attend and potluck organized
 //get complete details per potluck events including foods and members
 //update and delete potluck info
 
@@ -162,4 +177,6 @@ module.exports = {
 	claimFood,
 	getPotluckGuestsById,
 	joinPotluck,
+	getPotlucksToAttendByUser,
+	getOrganizedPotluckByUser,
 };

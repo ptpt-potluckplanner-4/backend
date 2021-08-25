@@ -22,6 +22,14 @@ returns the user info and token
 
 ` [GET] https://potluck-planner-04.herokuapp.com/users`
 
+# USER-POTLUCKS endpoints
+
+## get all potlucks user joined
+
+`[GET] https://potluck-planner-04.herokuapp.com/users/:id/potlucks `
+
+where `:id` is a user_id
+
 # POTLUCK endpoints
 
 ## get all potluck events
