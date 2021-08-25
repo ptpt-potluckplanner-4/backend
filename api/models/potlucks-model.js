@@ -146,18 +146,15 @@ const getPotlucksToAttendByUser = (user_id) => {
 		.select("p.*")
 		.leftJoin("users as u", "pg.guest", "u.user_id")
 		.leftJoin("potlucks as p", "pg.potluck_id", "p.potluck_id")
-		.where("guest", user_id)
-		.orderBy("pg.guest");
+		.where("guest", user_id);
 };
 
 //! untested and not connected to router yet
 const getOrganizedPotluckByUser = (user_id) => {
-	return db("potluck_guests as pg")
+	return db("potlucks as p")
 		.select("p.*")
-		.leftJoin("users as u", "pg.guest", "u.user_id")
-		.leftJoin("potlucks as p", "pg.potluck_id", "p.potluck_id")
-		.where("p.organizer", user_id)
-		.orderBy("pg.guest");
+		.join("users as u", "p.organizer", "u.user_id")
+		.where("p.organizer", user_id);
 };
 
 const deletePotluckById = (potluck_id) => {};
