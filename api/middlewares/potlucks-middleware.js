@@ -1,26 +1,17 @@
 //make sure user_id to add into potluck event is an integer or number and NOT a string
-//make sure user that has joined the potluck cant join again (unique)
 
-const validatePotluckData = () => {
+const validatePotluckData = () => {};
 
-}
+const validatepotluckId = () => {};
 
-const validate potluckId = () => {
-
-}
-
-const validateFoodData = () => {
-
-}
+const validateFoodData = () => {};
 
 const validatePotluckFoodId = () => {
-    //check if food exists in db
-}
+	//check if food exists in db
+};
 
 const validateJoinAsGuestData = () => {
-    
-}
+	//make sure user that has joined the potluck cant join again (unique)
+};
 
-module.exports = {
-
-}
+module.exports = {};

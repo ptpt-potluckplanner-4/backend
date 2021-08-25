@@ -42,6 +42,12 @@ requires this object notNullable and user must be logged in: `{ food_name: "stri
 
 returns a list of all the foods to bring in the potluck
 
+## DELETE a food in the potluck array of foods
+
+`[DELETE] https://potluck-planner-04.herokuapp.com/potlucks/:id/foods/:potluckFood_id`
+
+returns the list of all the foods to bring in the potluck without the deleted food
+
 ## GET array of all the foods to bring in the potluck
 
 `[GET] https://potluck-planner-04.herokuapp.com/potlucks/:id/foods`
@@ -60,7 +66,7 @@ returns updated object of that item `{ "potluckFood_id": 7, "food_name": "baked 
 
 `[GET] https://potluck-planner-04.herokuapp.com/potlucks/:id/guests`
 
-## PUT set your name as one of the guests coming to the potluck
+## POST set your name as one of the guests coming to the potluck
 
 `[POST] https://potluck-planner-04.herokuapp.com/potlucks/:id/guests`
 

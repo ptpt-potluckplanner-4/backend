@@ -86,6 +86,16 @@ const createFood = async (potluck_id, food) => {
 	return foodListByPotluckId;
 };
 
+const removeFood = async (potluck_id, potluckFood_id) => {
+	// eslint-disable-next-line no-unused-vars
+	const deleteFood = await db("potluck_foods")
+		.returning("potluckFood_id")
+		.where({ potluckFood_id })
+		.del();
+	const foodListByPotluckId = await getFoodsById(potluck_id);
+	return foodListByPotluckId;
+};
+
 const getPotluckFoodById = (potluckFood_id) => {
 	return db("potluck_foods as pf")
 		.select("pf.potluckFood_id", "food_name", "u.name as contributor")
@@ -147,6 +157,7 @@ module.exports = {
 	addPotluck,
 	getFoodsById,
 	createFood,
+	removeFood,
 	getPotluckFoodById,
 	claimFood,
 	getPotluckGuestsById,

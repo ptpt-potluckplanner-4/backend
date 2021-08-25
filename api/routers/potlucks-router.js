@@ -37,10 +37,10 @@ router.get("/:id/foods", (req, res, next) => {
 		.catch(next);
 });
 
-router.post("/:id/foods", (req, res, next) => {
+router.delete("/:id/foods/:potluckFood_id", (req, res, next) => {
 	const { id } = req.params;
-	const body = req.body;
-	Potlucks.createFood(id, body)
+	const { potluckFood_id } = req.params;
+	Potlucks.removeFood(id, potluckFood_id)
 		.then((newFood) => {
 			res.status(200).json(newFood);
 		})
