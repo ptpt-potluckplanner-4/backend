@@ -52,6 +52,12 @@ where `:id` is the user_id
 
 requires this object notNullable and user must be logged in: `{ title: "string", date: "string", time: "string", location: "string", organizer: state.user_id }`
 
+## update potluck data
+
+`[PUT] https://potluck-planner-04.herokuapp.com/potlucks/:id `
+
+requires this object notNullable and user must be logged in: `{ title: "string", date: "string", time: "string", location: "string", organizer: state.user_id }`
+
 # POTLUCK-FOODS endpoints
 
 ## create a food for the potluck

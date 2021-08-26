@@ -12,7 +12,6 @@ router.get("/", (req, res, next) => {
 });
 
 // need to add get user by id, edit user info, delete user
-
 router.get("/:id/joined-potlucks", (req, res, next) => {
 	const { id } = req.params;
 	Potlucks.getPotlucksToAttendByUser(id)

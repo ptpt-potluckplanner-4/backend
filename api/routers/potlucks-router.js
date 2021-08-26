@@ -33,6 +33,22 @@ router.get("/:id", Middleware.validatePotluckId, (req, res, next) => {
 		.catch(next);
 });
 
+//update potluck details
+router.put(
+	"/:id",
+	Middleware.validatePotluckId,
+	Middleware.validatePotluckData,
+	(req, res, next) => {
+		const { id } = req.params;
+		const body = req.body;
+		Potlucks.updatePotluckData(id, body)
+			.then((potluck) => {
+				res.status(200).json(potluck);
+			})
+			.catch(next);
+	},
+);
+
 //get potluck foods by potluck id
 router.get("/:id/foods", Middleware.validatePotluckId, (req, res, next) => {
 	const { id } = req.params;
