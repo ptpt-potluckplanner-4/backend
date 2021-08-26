@@ -37,7 +37,7 @@ router.post(
 			res.status(401).json({ message: "Incorrect password" });
 		} else if (user && bcrypt.compareSync(password, user.password)) {
 			const token = tokenBuilder(user);
-			res.json({
+			res.status(200).json({
 				message: `Welcome ${user.name}!`,
 				user_id: `${user.user_id}`,
 				token,

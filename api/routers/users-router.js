@@ -17,7 +17,7 @@ router.get("/:id/joined-potlucks", (req, res, next) => {
 	const { id } = req.params;
 	Potlucks.getPotlucksToAttendByUser(id)
 		.then((potlucks) => {
-			res.json(potlucks);
+			res.status(200).json(potlucks);
 		})
 		.catch(next);
 });
@@ -26,7 +26,7 @@ router.get("/:id/hosted-potlucks", (req, res, next) => {
 	const { id } = req.params;
 	Potlucks.getOrganizedPotluckByUser(id)
 		.then((potlucks) => {
-			res.json(potlucks);
+			res.status(200).json(potlucks);
 		})
 		.catch(next);
 });

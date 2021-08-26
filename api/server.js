@@ -36,7 +36,6 @@ server.use("*", (req, res) => {
 server.use((err, req, res, next) => {
 	const message = err?.message || "something went wrong in the server";
 	const status = err?.status || 500;
-
 	res.status(`${status}`).json({ message, stack: err.stack });
 });
 

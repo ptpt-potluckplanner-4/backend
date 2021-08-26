@@ -101,18 +101,23 @@ router.get("/:id/guests", Middleware.validatePotluckId, (req, res, next) => {
 });
 
 //add yourself to list of guests of potluck
-router.post("/:id/guests", Middleware.validatePotluckId, (req, res, next) => {
-	const { id } = req.params;
+router.post(
+	"/:id/guests",
+	Middleware.validatePotluckId,
+	Middleware.validateJoinAsGuestData,
+	(req, res, next) => {
+		const { id } = req.params;
 
-	//body requires: { guest: state_user.id }
-	const body = req.body;
+		//body requires: { guest: state_user.id }
+		const body = req.body;
 
-	Potlucks.joinPotluck(id, body.guest)
-		.then((response) => {
-			res.json(response);
-		})
-		.catch(next);
-});
+		Potlucks.joinPotluck(id, body.guest)
+			.then((response) => {
+				res.status(200).json(response);
+			})
+			.catch(next);
+	},
+);
 
 //update potluck details
 //delete the potluck

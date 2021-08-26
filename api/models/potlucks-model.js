@@ -149,7 +149,6 @@ const getPotlucksToAttendByUser = (user_id) => {
 		.where("guest", user_id);
 };
 
-//! untested and not connected to router yet
 const getOrganizedPotluckByUser = (user_id) => {
 	return db("potlucks as p")
 		.select("p.*")

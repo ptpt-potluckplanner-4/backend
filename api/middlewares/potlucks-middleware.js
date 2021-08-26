@@ -36,25 +36,38 @@ const validatePotluckId = (req, res, next) => {
 const validateFoodData = (req, res, next) => {
 	const body = req.body;
 	if (!body || Object.keys(body).length === 0) {
-		res.status(400).json({ message: "Food name required." });
+		res.status(400).json({ message: "Text field required." });
 	} else {
 		req.body.food_name = body.food_name.trim();
 		next();
 	}
 };
 
-const validatePotluckFoodId = () => {
-	//check if food exists in db
-};
+const validateJoinAsGuestData = async (req, res, next) => {
+	const { id } = req.params;
+	const body = req.body; //guest: state.user_id
 
-const validateJoinAsGuestData = () => {
-	//make sure user that has joined the potluck cant join again (unique)
+	if (!body || Object.keys(body).length === 0) {
+		res.status(400).json({ message: "User required." });
+	} else {
+		Potlucks.getPotluckGuestsById(id)
+			.then((potluckList) => {
+				//potluckList returns an array of user data attending to the potluck.
+				// checks if user exist in the array
+				const found = potluckList.some((data) => data.user_id === body.guest);
+				if (found) {
+					res.status(400).json({ message: "User already a guest." });
+				} else {
+					next();
+				}
+			})
+			.catch(next);
+	}
 };
-
-//make sure user_id to add into potluck event is an integer or number and NOT a string
 
 module.exports = {
 	validatePotluckData,
 	validatePotluckId,
 	validateFoodData,
+	validateJoinAsGuestData,
 };
