@@ -143,7 +143,7 @@ const joinPotluck = async (potluck_id, user_id) => {
 
 const getPotlucksToAttendByUser = (user_id) => {
 	return db("potluck_guests as pg")
-		.select("p.*")
+		.select("p.*", "u.name as organizer")
 		.leftJoin("users as u", "pg.guest", "u.user_id")
 		.leftJoin("potlucks as p", "pg.potluck_id", "p.potluck_id")
 		.where("guest", user_id);
