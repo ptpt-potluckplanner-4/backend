@@ -2,6 +2,7 @@
 const router = require("express").Router();
 const Potlucks = require("../models/potlucks-model");
 const Middleware = require("../middlewares/potlucks-middleware");
+const { restricted } = require("../middlewares/auth-middleware"); //! need to implement this middleware
 
 //get all potlucks
 router.get("/", (req, res, next) => {
@@ -38,6 +39,17 @@ router.get("/:id/foods", Middleware.validatePotluckId, (req, res, next) => {
 	Potlucks.getFoodsById(id)
 		.then((foods) => {
 			res.status(200).json(foods);
+		})
+		.catch(next);
+});
+
+//add foods in the potluck
+router.post("/:id/foods", (req, res, next) => {
+	const { id } = req.params;
+	const body = req.body;
+	Potlucks.createFood(id, body)
+		.then((potluckFoodsArr) => {
+			res.status(200).json(potluckFoodsArr);
 		})
 		.catch(next);
 });
@@ -121,5 +133,6 @@ router.post(
 
 //update potluck details
 //delete the potluck
+//need to add restricted middleware to: add potluck, join potluck
 
 module.exports = router;
