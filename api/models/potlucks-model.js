@@ -156,10 +156,10 @@ const getOrganizedPotluckByUser = (user_id) => {
 		.where("p.organizer", user_id);
 };
 
-const deletePotluckById = (potluck_id) => {};
+// const deletePotluckById = (potluck_id) => {};
+//const updatePotluckData
 
 //get complete details per potluck events including foods and members
-//update and delete potluck info
 
 module.exports = {
 	getAllPotlucks,
