@@ -60,7 +60,7 @@ router.get("/:id/foods", Middleware.validatePotluckId, (req, res, next) => {
 });
 
 //add foods in the potluck
-router.post("/:id/foods", (req, res, next) => {
+router.post("/:id/foods", Middleware.validatePotluckId, (req, res, next) => {
 	const { id } = req.params;
 	const body = req.body;
 	Potlucks.createFood(id, body)
@@ -161,7 +161,6 @@ router.delete("/:id/guests", Middleware.validatePotluckId, (req, res, next) => {
 		.catch(next);
 });
 
-//update potluck details
 //delete the potluck
 //need to add restricted middleware to: add potluck, join potluck
 

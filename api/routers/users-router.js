@@ -44,22 +44,30 @@ router.put(
 );
 
 // delete user
-router.get("/:id/joined-potlucks", (req, res, next) => {
-	const { id } = req.params;
-	Potlucks.getPotlucksToAttendByUser(id)
-		.then((potlucks) => {
-			res.status(200).json(potlucks);
-		})
-		.catch(next);
-});
+router.get(
+	"/:id/joined-potlucks",
+	Middleware.validateUserId,
+	(req, res, next) => {
+		const { id } = req.params;
+		Potlucks.getPotlucksToAttendByUser(id)
+			.then((potlucks) => {
+				res.status(200).json(potlucks);
+			})
+			.catch(next);
+	},
+);
 
-router.get("/:id/hosted-potlucks", (req, res, next) => {
-	const { id } = req.params;
-	Potlucks.getOrganizedPotluckByUser(id)
-		.then((potlucks) => {
-			res.status(200).json(potlucks);
-		})
-		.catch(next);
-});
+router.get(
+	"/:id/hosted-potlucks",
+	Middleware.validateUserId,
+	(req, res, next) => {
+		const { id } = req.params;
+		Potlucks.getOrganizedPotluckByUser(id)
+			.then((potlucks) => {
+				res.status(200).json(potlucks);
+			})
+			.catch(next);
+	},
+);
 
 module.exports = router;
