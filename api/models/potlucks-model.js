@@ -148,6 +148,21 @@ const joinPotluck = async (potluck_id, user_id) => {
 	return potluckGuests;
 };
 
+// un-join a potluck event
+const unregisterFromPotluck = async (potluck_id, user_id) => {
+	const join = await db("potluck_guests as pg")
+		.select("pg.potluckGuest_id", "pg.potluck_id", "u.user_id", "u.name")
+		.join("users as u", "pg.guest", "u.user_id")
+		.where({
+			potluck_id: potluck_id,
+			guest: user_id,
+		})
+		.del();
+
+	const potluckGuests = await getPotluckGuestsById(potluck_id);
+	return potluckGuests;
+};
+
 // get all potlucks user is attending
 const getPotlucksToAttendByUser = (user_id) => {
 	return db("potluck_guests as pg")
@@ -190,4 +205,5 @@ module.exports = {
 	getPotlucksToAttendByUser,
 	getOrganizedPotluckByUser,
 	updatePotluckData,
+	unregisterFromPotluck,
 };

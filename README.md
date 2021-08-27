@@ -20,13 +20,17 @@ returns the user info and token
 
 ## update user details
 
-`[PUT] https://potluck-planner-04.herokuapp.com/users `
+`[PUT] https://potluck-planner-04.herokuapp.com/users/:id `
 
 requires object notNullable: `{ username: "string", password: "string" }`
 
 ## get all users
 
 ` [GET] https://potluck-planner-04.herokuapp.com/users`
+
+## get user by id
+
+` [GET] https://potluck-planner-04.herokuapp.com/users/:id`
 
 # USER-POTLUCKS endpoints
 
@@ -109,3 +113,9 @@ returns updated object of that item `{ "potluckFood_id": 7, "food_name": "baked 
 requires object: `{"guest": state.user_id}`
 
 returns an array of guests coming to the potluck
+
+## unregister from potluck event
+
+`[DELETE] https://potluck-planner-04.herokuapp.com/potlucks/:id/guests`
+
+requires object: `{"guest": state.user_id}`

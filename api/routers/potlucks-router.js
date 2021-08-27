@@ -147,6 +147,20 @@ router.post(
 	},
 );
 
+//unregister from potluck
+router.delete("/:id/guests", Middleware.validatePotluckId, (req, res, next) => {
+	const { id } = req.params;
+
+	//body requires: { guest: state_user.id }
+	const body = req.body;
+
+	Potlucks.unregisterFromPotluck(id, body.guest)
+		.then((response) => {
+			res.status(200).json(response);
+		})
+		.catch(next);
+});
+
 //update potluck details
 //delete the potluck
 //need to add restricted middleware to: add potluck, join potluck
