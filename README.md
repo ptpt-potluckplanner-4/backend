@@ -18,6 +18,12 @@ requires object notNullable: `{ username: "string", password: "string" }`
 
 returns the user info and token
 
+## update user details
+
+`[PUT] https://potluck-planner-04.herokuapp.com/users `
+
+requires object notNullable: `{ username: "string", password: "string" }`
+
 ## get all users
 
 ` [GET] https://potluck-planner-04.herokuapp.com/users`

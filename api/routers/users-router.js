@@ -44,7 +44,6 @@ router.put(
 );
 
 // delete user
-
 router.get("/:id/joined-potlucks", (req, res, next) => {
 	const { id } = req.params;
 	Potlucks.getPotlucksToAttendByUser(id)
