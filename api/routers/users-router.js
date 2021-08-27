@@ -4,7 +4,6 @@ const Users = require("../models/users-model");
 const Potlucks = require("../models/potlucks-model");
 const Middleware = require("../middlewares/auth-middleware");
 const bcrypt = require("bcryptjs");
-const tokenBuilder = require("../utils/token-builder");
 
 router.get("/", (req, res, next) => {
 	Users.getAllUsers()
@@ -43,7 +42,6 @@ router.put(
 	},
 );
 
-// delete user
 router.get(
 	"/:id/joined-potlucks",
 	Middleware.validateUserId,

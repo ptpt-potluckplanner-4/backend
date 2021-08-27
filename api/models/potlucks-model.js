@@ -14,7 +14,7 @@ const getAllPotlucks = () => {
 			"u.name as organizer",
 		)
 		.join("users as u", "p.organizer", "u.user_id")
-		.orderBy("potluck_id");
+		.orderBy("potluck_id", "desc");
 };
 
 //get potluck by filter
@@ -30,7 +30,7 @@ const getPotluckByFilter = (filter) => {
 		)
 		.join("users as u", "p.organizer", "u.user_id")
 		.where(filter)
-		.orderBy("potluck_id");
+		.orderBy("potluck_id", "desc");
 };
 
 //get potluck by id
@@ -131,7 +131,7 @@ const getPotluckGuestsById = (potluck_id) => {
 		.select("pg.potluckGuest_id", "pg.potluck_id", "u.user_id", "u.name")
 		.leftJoin("users as u", "pg.guest", "u.user_id")
 		.where("potluck_id", potluck_id)
-		.orderBy("u.user_id");
+		.orderBy("u.user_id", "desc");
 };
 
 //join potluck event
@@ -169,7 +169,8 @@ const getPotlucksToAttendByUser = (user_id) => {
 		.select("p.*", "u.name as organizer")
 		.leftJoin("potlucks as p", "pg.potluck_id", "p.potluck_id")
 		.leftJoin("users as u", "p.organizer", "u.user_id")
-		.where("guest", user_id);
+		.where("guest", user_id)
+		.orderBy("p.potluck_id", "desc");
 };
 
 //get all potlucks user is hosting
@@ -177,7 +178,8 @@ const getOrganizedPotluckByUser = (user_id) => {
 	return db("potlucks as p")
 		.select("p.*")
 		.join("users as u", "p.organizer", "u.user_id")
-		.where("p.organizer", user_id);
+		.where("p.organizer", user_id)
+		.orderBy("p.potluck_id", "desc");
 };
 
 // const deletePotluckById = (potluck_id) => {};

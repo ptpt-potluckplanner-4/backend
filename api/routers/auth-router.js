@@ -48,6 +48,7 @@ router.post(
 	},
 );
 
+//delete user endpoint
 //!need to add error handler on routers
 
 module.exports = router;
